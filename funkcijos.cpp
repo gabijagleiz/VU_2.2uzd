@@ -1,5 +1,11 @@
 #include "funkcijos.h"
 
+void Studentas::setStudent(string var, string pav, string egz){
+	vardas = var;
+	pavarde = pav;
+	egzaminas = egz;
+}
+
 void sort (vector <Studentas> S, int k){
 
 	for (int i = 0; i < k; i++)
@@ -10,7 +16,7 @@ void sort (vector <Studentas> S, int k){
 }
 }
 
-
+/*
 bool CompareLastNames(Studentas& a, Studentas& b)
 {
     return a.pav < b.pav;
@@ -20,7 +26,7 @@ template<class T>
 void rikiavimas(T& S)
 {
     sort(S.begin(), S.end(), CompareLastNames);
-}
+}*/
 
 
 //vidurkis
@@ -48,21 +54,19 @@ double mediana (vector <int> nd, int nkiek, int egz){
 	return median * 0.4 + egz * 0.6;
 }
 
+bool yra_protingas(Studentas& S){
+	return (S.gr >= 5);
+}
+
 
 template <class T>
-void skirstymas(T& S, T& protingi, T& nevykeliai, int k){
-	auto start = high_resolution_clock::now();
+void skirstymas(T& S, T& protingi, T& nevykeliai){
 	int pk = 0;
 	int nk = 0;
-	for (int i = 0; i < k; i++){
-		if (S.back().gr >= 5){
-			protingi.push_back(S.back());
-		//	pk++;
-			}
-		if (S.back().gr < 5){
-			nevykeliai.push_back(S.back());
-			//nk++;
-			}
+	auto start = high_resolution_clock::now();
+	for (int i = 0; i < S.size(); i++){
+		copy_if(S.begin(), S.end(), protingi.begin(), [](Studentas S) {return S.gr >= 5;});
+		copy_if(S.begin(), S.end(), nevykeliai.begin(), [](Studentas S) {return S.gr < 5;});
 	}
 	auto end= high_resolution_clock::now();
 	duration<double> diff= end-start; 
@@ -72,14 +76,14 @@ void skirstymas(T& S, T& protingi, T& nevykeliai, int k){
 }
 
 template <class T>
-void skirstymas(T& S, T& protingi, int k){
-	auto start = high_resolution_clock::now();
+void skirstymas(T& S, T& protingi){
 	int pk = 0;
 	int nk = 0;
-	for (int i = 0; i < k; i++){
+	auto start = high_resolution_clock::now();
+	for (int i = 0; i < S.size(); i++){
 		if (S.back().gr >= 5){
-			protingi.push_back(S.back());
-			S.erase(S.begin() + 0);
+			copy_if(S.begin(), S.end(), protingi.begin(), [](Studentas S) {return S.gr >= 5;});
+			S.erase(remove_if(S.begin(), S.end(), yra_protingas ), S.end());
 			}
 	}
 	auto end= high_resolution_clock::now();
@@ -92,7 +96,13 @@ void skirstymas(T& S, T& protingi, int k){
 
 template <class T>
 void spausdinimas(T& S, T& protingi, T& nevykeliai){
-//	auto start = high_resolution_clock::now();
+
+	int st;      //strategija
+	cout << "Kuria strategija naudosite duomenu grupavimui?\n1 - rusiavimas i du naujus konteinerius \n2 - rusiavimas naudojant tik viena nauja konteineri\n";
+	cin >> st;
+
+	if (st == 1) skirstymas(S, protingi, nevykeliai);
+	if (st == 2) skirstymas(S, protingi);
 
 	ofstream rf;	
 	
@@ -134,6 +144,11 @@ void ivedimas(T& S, T& protingi, T& nevykeliai){
 		int k = 0;
 	double sum = 0;
 	int r;
+
+	string var, pav;
+	int nk;
+	vector <int> nd;
+	double vid, med, gr;
 	
 	char ats;
 	char pas;   //pasirinkimas
@@ -238,7 +253,7 @@ void ivedimas(T& S, T& protingi, T& nevykeliai){
     }
 
 	if (pas == 'n' || pas == 'N') {
-		rikiavimas(S);
+	//	rikiavimas(S);
 	//	skirstymas(S, protingi, nevykeliai, k);
 		spausdinimas(S, protingi, nevykeliai);
 	}
@@ -249,10 +264,16 @@ void ivedimas(T& S, T& protingi, T& nevykeliai){
 template <class T>
 void skaitymas(T& S, T& protingi, T& nevykeliai){
 
-	int k;
-	char pas;
+	int k = 0;
+	int p = 0;
+	int pas;
+	string var, pav;
+	int nk;
+	vector <int> nd;
+	double vid, med, gr;
+
 	cout << "Koki studentu kieki nuskaityti?\n" << "1 - 1000 \n" << "2 - 10000 \n" << "3 - 100000 \n" << "4 - 1000000 \n" << "5 - 10000000\n";
-	do{
+//	do{
 		cin >> pas;
 
 		if (pas == 1) k = 1000;
@@ -261,7 +282,7 @@ void skaitymas(T& S, T& protingi, T& nevykeliai){
 		if (pas == 4) k = 1000000;
 		if (pas == 5) k = 10000000;
 
-	}while (pas > 5 || pas < 1);
+//	}while (pas > 5 || pas < 1);
 	
 	auto start= high_resolution_clock::now();
 
@@ -269,7 +290,7 @@ void skaitymas(T& S, T& protingi, T& nevykeliai){
             ifstream df("Failas" + to_string(k) + ".txt");
             buffer << df.rdbuf();
             string line;
-            getline(buffer, line);
+          //  getline(buffer, line);
             Studentas studentas;
 
 		 try
@@ -296,12 +317,13 @@ void skaitymas(T& S, T& protingi, T& nevykeliai){
 				studentas.gr = (studentas.vid+studentas.med) / 2;
                 S.push_back(studentas);
 
-				k++;
+				p++;
             }
 
+		cout << p << endl;
 		try
         {
-            if (k == 0)
+            if (p == 0)
                 throw "Nuskaitytas failas tuščias! ";
         }
         catch(const char *Message)
@@ -313,11 +335,13 @@ void skaitymas(T& S, T& protingi, T& nevykeliai){
 	duration<double> diff= end-start; 
 	cout << "Failo skaitymas uztruko: " << diff.count() << "s\n" << endl;
 
-	if (k > 0) {
-		rikiavimas(S);
+	if (p > 0) {
+	//	rikiavimas(S);
 	//	skirstymas(S, protingi, nevykeliai, k);
 		spausdinimas(S, protingi, nevykeliai);
 	}
+
+	
 
 	df.close();
 }
@@ -331,6 +355,12 @@ void generavimas(T& S){
 	Studentas studentas;
 	int pas = 0;
 	int k = 0;
+
+	string var, pav;
+	int nk;
+	vector <int> nd;
+	double vid, med, gr;
+
 	cout << "Kiek studentu norite sugeneruoti? " << endl;
 	cout << "1 - 1000 \n" << "2 - 10000 \n" << "3 - 100000 \n" << "4 - 1000000 \n" << "5 - 10000000\n";
 
@@ -381,6 +411,11 @@ void genskaitymas(T& S, T& protingi, T& nevykeliai){
 
 	generavimas(S);
 
+	string var, pav;
+	int nk;
+	vector <int> nd;
+	double vid, med, gr;
+
 	auto start= high_resolution_clock::now();
 	stringstream buffer;
 	int i = S.size();
@@ -413,12 +448,13 @@ while (getline(buffer, line))
 	cout << "Failo skaitymas uztruko: " << diff.count() << "s\n" << endl;
 
 	if (k > 0) {
-		rikiavimas(S);
-		//skirstymas(S, protingi, nevykeliai, k);
+		//rikiavimas(S);
+	//	skirstymas(S, protingi, nevykeliai, k);
 		spausdinimas(S, protingi, nevykeliai);
 	}}
 	df.close();
 }
+
 
 template <class T>
 void duomenys(T& S, T& protingi, T& nevykeliai){
@@ -427,21 +463,11 @@ void duomenys(T& S, T& protingi, T& nevykeliai){
 
 	cout << "Duomenis ivesite, skaitysite ar generuosite naujus? (i/s/g)\n";
 	cin >> ats;
-	cout << "Duomenu grupavimui naudosite 1 strategija (rusiavimas i du naujus konteinerius)
-	ar 2 (rusiavimas naudojant tik viena nauja konteineri)? (1/2)\n"
-	cin >> st;
-	if (st == 1){
-		skirstymas(S, protingi, nevykeliai, k);
+
+		
 		if (ats == 'i' || ats == 'I') ivedimas(S, protingi, nevykeliai);
 		if (ats == 's' || ats == 'S') skaitymas(S, protingi, nevykeliai);
 		if (ats == 'g' || ats == 'G') genskaitymas(S, protingi, nevykeliai);
-}
-	if (st == 2){
-		skirstymas(S, protingi, k);
-		if (ats == 'i' || ats == 'I') ivedimas(S, protingi, nevykeliai);
-		if (ats == 's' || ats == 'S') skaitymas(S, protingi, nevykeliai);
-		if (ats == 'g' || ats == 'G') genskaitymas(S, protingi, nevykeliai);
-	}
 }
 
 //template <class T>
