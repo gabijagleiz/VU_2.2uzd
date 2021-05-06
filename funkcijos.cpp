@@ -1,6 +1,6 @@
 #include "funkcijos.h"
 
-void Studentas::setStudent(string var, string pav, string egz){
+void setStudent(string var, string pav, string egz){
 	vardas = var;
 	pavarde = pav;
 	egzaminas = egz;
