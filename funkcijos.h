@@ -22,24 +22,50 @@ const char DFV[] = "failas1000.txt";
 
 class Studentas {
 	private:
-		string vardas, pavarde;    //vardas, pavarde
-		int nk;          //nd kiekis
+		string var, pav;    //vardas, pavarde
+		int nkiek;          //nd kiekis
 		vector <int> nd;  	//namu darbu rezultatas
 		int egz;			//egzamino rezultatas
 		double vid, med, gr;
 	public:    
-		Studentas() {vardas = "", pavarde = "", ndkiekis = 0, egzaminas = 0, Vidurkis = 0, Mediana = 0, Galutinis = 0};
-		Studentas(string vardas, string pavarde, int ndkiekis, vector <int> nd, int egzaminas, double Vidurkis, double Mediana
-		double Galutinis);
-		
-		void setStudent(string, string, int);
+		Studentas() {var = "", pav = "", nkiek = 0, egz = 0, vid = 0, med = 0, gr = 0;}
+
+		void setStudentas(string, string, int, vector <int>, int, double, double, double);
 		string getname() const {return var;}
-		string getLastname() const {return pav;}
+		string getlastname() const {return pav;}
+		int getnumber() const{return nkiek;}
 		int getExam() const {return egz;}
 		int getFinal() const {return gr;}
 		vector <int> gethomework() const {return nd;}
-	
-};
+
+		~Studentas(){} 
+
+		Studentas(const Studentas& other){
+			var = other.var;
+			pav = other.pav;
+			nk = other.nk;
+			nd = other.nd;
+			egz = other.egz;
+			vid = other.vid;
+			med = other.med;
+			gr = other.gr;
+		}
+
+		Studentas& operator= (const Studentas& other){
+			
+			if(this != &other){
+			this.var = other.var;
+			this.pav = other.pav;
+			this.nk = other.nk;
+			this.nd = other.nd;
+			this.egz = other.egz;
+			this.vid = other.vid;
+			this.med = other.med;
+			this.gr = other.gr;
+		}
+		return *this;
+	}
+}
 
 void sort (vector <Studentas> S, int k);
 /*bool CompareLastNames(Studentas& a, Studentas& b);
@@ -62,9 +88,6 @@ void skirstymas(T&, T&);
 template <class T>
 void spausdinimas(T&, T&, T&);
 
-//void skirstymas(vector <Studentas> &S, vector <Studentas> &protingi, vector <Studentas> &nevykeliai, int k)
-//void spausdinimas(vector <Studentas> S, int k);
-
 template <class T>
 void ivedimas(T&, T&, T&);
 
@@ -81,3 +104,4 @@ template <class T>
 void duomenys(T&, T&, T&);
 
 void galutinis(char);
+
