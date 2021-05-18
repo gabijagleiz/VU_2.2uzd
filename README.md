@@ -17,18 +17,25 @@ Paleidus programą vartotojo prašo :
 - Pasirinkti, ar egzamino rezultatas bus įvedamas ranka (rašyti 't' (Taip) arba 'n' (Ne))
   - Pasirinkus 't', įvesti egzamino rezultatą
 - Pasirinkti, ar norima išvesti vidurkį, ar medianą (rašyti 'v' (vidurkį) arba 'm' (medianą))
+- Pasirinkti studentų skirstymo strategiją (1 - rusiavimas i du naujus konteinerius, 2 - rusiavimas naudojant tik viena nauja konteineri)
 
 
 Įvedant duomenis, vartotojui pasirinkus 'n', rezultatai/kiekis yra sugeneruojami atsitiktinai. 
 
 Tada duomenys yra išrikiuojami ir išvedami į du failus: protingi (galutinis įvertinimas >=5) ir nevykeliai (galutinis įvertinimas <5).
 
-### Pasirinkus 's' (duomenys skaitomi):
-- duomenys yra nuskaitomi, išrikiuojami ir išvedami į du failus: protingi (galutinis įvertinimas >=5) ir nevykeliai (galutinis įvertinimas <5)
+### Pasirinkus 's' (duomenys skaitomi), vartotojo prašoma:
+- Pasirinkti konteinerį, duomenims saugoti (v - vektorius, l - list, d - deque)
+- Pasirinkti nuskaitomų studentų kiekį (1 - 1000, 2 - 10000, 3 - 100000, 4 - 100000, 5 - 1000000)
+- Pasirinkti studentų skirstymo strategiją (1 - rusiavimas i du naujus konteinerius, 2 - rusiavimas naudojant tik viena nauja konteineri)
+
+Tada duomenys yra nuskaitomi, išrikiuojami ir išvedami į du failus: protingi (galutinis įvertinimas >=5) ir nevykeliai (galutinis įvertinimas <5)
 
 ### Pasirinkus 'g' (duomenys generuojami), vartotojo prašoma: 
--Pasirinkti studentų kiekį (1 - 1000, 2 - 10000, 3 - 100000, 4 - 100000, 5 - 1000000)
--Pasirinkus 1, bus generuojama 1000 studentų, pasirinkus 2 - 10000 ir t.t.
+- Pasirinkti konteinerį, duomenims saugoti (v - vektorius, l - list, d - deque)
+- Pasirinkti studentų kiekį (1 - 1000, 2 - 10000, 3 - 100000, 4 - 100000, 5 - 1000000)
+- Pasirinkus 1, bus generuojama 1000 studentų, pasirinkus 2 - 10000 ir t.t.
+- Pasirinkti studentų skirstymo strategiją (1 - rusiavimas i du naujus konteinerius, 2 - rusiavimas naudojant tik viena nauja konteineri)
 
 Tada duomenys yra išrikiuojami ir išvedami į du failus: protingi (galutinis įvertinimas >=5) ir nevykeliai (galutinis įvertinimas <5).
 
@@ -37,6 +44,14 @@ Tada duomenys yra išrikiuojami ir išvedami į du failus: protingi (galutinis �
 - Įvedus paskutinį pažymį spausti 'enter' klavišą
 - Įvedant studentų kiekį, įvedus skaičių mažesnį/lygu 0 arba didesnį už 100, reikės įvesti naują skaičių
 - Įvedant namų darbų ar egzaminų rezultatus, įvedus skaičių mažesnį už 1 arba didesnį už 10, reikės įvesti naują skaičių
+
+
+## Duomenų nuskaitymas + skirstymas naudojant skirtingus konteinerius
+| Container | 1000 | 10000 | 100000 | 1000000 | 10000000 |
+| --- | --- | --- | --- | --- | ---|
+| Vector | 0,0855s | 1,214s | 4,552s | 20,137s | 106,815s |
+| List | 0,0974s | 1,364s | 3,981s | 25,504s | 101,294s |
+| Deque | 0,892s | 1,258s | 4,028s | 29,567s | 101,885s|
 
 # Programos įdiegimas
 - Atsisiųskite programos versiją iš [releases](https://github.com/gabijagleiz/VU_2.uzd/releases)
