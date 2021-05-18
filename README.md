@@ -53,3 +53,6 @@ Tada duomenys yra išrikiuojami ir išvedami į du failus: protingi (galutinis �
 - [v0.5](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.5) pridėta galimybė rinktis konteinerį
 - [v0.5.1](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.5.1) patobulinta 0.5 versija
 - [v1.0](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.1) dvi strategijos grupuoti studentus
+- [v1.1](https://github.com/gabijagleiz/VU_2.2uzd/releases/tag/v1.1) pridėtas Class tipas
+- [v1.2](https://github.com/gabijagleiz/VU_2.2uzd/releases/tag/v1.2) rule of three
+- [v1.5](https://github.com/gabijagleiz/VU_2.2uzd/releases/tag/v1.5) pridėta bazinė klasė "Asmuo"
