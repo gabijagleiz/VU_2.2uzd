@@ -1,4 +1,7 @@
 #define pragma once
+#include <string>
+
+using namespace std;
 
 class Asmuo {
 
@@ -11,4 +14,4 @@ class Asmuo {
     void setname(string vardas) {var = vardas;}
 	void setsurname(string pavarde) {pav = pavarde;}
 
-}
+};
