@@ -71,3 +71,4 @@ Tada duomenys yra išrikiuojami ir išvedami į du failus: protingi (galutinis �
 - [v1.1](https://github.com/gabijagleiz/VU_2.2uzd/releases/tag/v1.1) pridėtas Class tipas
 - [v1.2](https://github.com/gabijagleiz/VU_2.2uzd/releases/tag/v1.2) rule of three
 - [v1.5](https://github.com/gabijagleiz/VU_2.2uzd/releases/tag/v1.5) pridėta bazinė klasė "Asmuo"
+- [v2.0](https://github.com/gabijagleiz/VU_2.2uzd/releases/tag/v2.0) unit testai, doxygen dokumentacija
