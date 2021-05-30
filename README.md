@@ -53,6 +53,23 @@ Tada duomenys yra išrikiuojami ir išvedami į du failus: protingi (galutinis �
 | List | 0,0974s | 1,364s | 3,981s | 25,504s | 101,294s |
 | Deque | 0,892s | 1,258s | 4,028s | 29,567s | 101,885s|
 
+## Duomenų skirstymas
+# 1 strategija
+Bendro studentai konteinerio (vector, list ir deque tipų) skaidymas (rūšiavimas) į du naujus to paties tipo konteinerius: "nevykeliai" ir "protingi". 
+| Container | 1000 | 10000 | 100000 | 1000000 | 10000000 |
+| --- | --- | --- | --- | --- | ---|
+| Vector | 0,0209s | 0,3041s | 3,172s | 15,157s | 83,781s |
+| List | 0,0207s | 0,3061s | 2,952s | 11,760 | 72,321s |
+| Deque | 0,0189s | 0,2942s | 3,011s | 16,021s | 88,905s|
+
+# 2 strategija
+Bendro studentų konteinerio (vector, list ir deque) skaidymas (rūšiavimas) panaudojant tik vieną naują konteinerį: "protingi". 
+| Container | 1000 | 10000 | 100000 | 1000000 | 10000000 |
+| --- | --- | --- | --- | --- | ---|
+| Vector | 0,0128s | 0,2263s | 3,002s | 14,206s | 74,324s |
+| List | 0,0139s | 0,2229s | 2,061s | 10,248s | 57,378s |
+| Deque | 0,0129s | 0,2279s | 2,486s | 15,645s | 79,048s|
+
 # Programos įdiegimas
 - Atsisiųskite programos versiją iš [releases](https://github.com/gabijagleiz/VU_2.uzd/releases)
 - Išarchivuokite parsisiųstą failą.
